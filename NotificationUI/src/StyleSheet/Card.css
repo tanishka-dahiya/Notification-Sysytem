@@ -1,0 +1,35 @@
+
+.flexbox {
+    display: flex;
+   
+  }
+  
+  .flexbox > div {
+    background-color: #f1f1f1;
+    width:50%;
+    height: 350px;
+    margin: 30px;
+    padding: 20px;
+    font-size: 30px;
+  }
+  .ongoing{
+    margin: 5px;
+    height: 25%;
+    background: #36A2EB;
+  }
+  .completed{
+    margin: 5px;
+    height: 25%;
+    background: #FFCE56;
+  }
+  .deleted{
+    margin: 5px;
+    height: 25%;
+    background: #FF6384;
+  }
+  .expired{
+    margin: 5px;
+    height: 25%;
+    background: #FF6364;
+  }
+  
