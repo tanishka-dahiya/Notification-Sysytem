@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
-body,html{
-  background: linear-gradient(-135deg, #c850a0, #4158d0);
-}
+
 h2{
   padding: 20px;
 }

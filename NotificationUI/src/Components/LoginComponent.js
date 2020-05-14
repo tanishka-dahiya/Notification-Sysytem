@@ -3,13 +3,14 @@ import { PasswordField } from '../commonComponents/index';
 import { TextField } from '../commonComponents/index';
 import { Button } from '../commonComponents/index';
 import {
-    Link
+    Link, useHistory
 } from "react-router-dom";
 import Zoom from 'react-reveal/Zoom';
 import '../StyleSheet/Login.css';
 
 
 function LoginPageContainer() {
+    let history = useHistory();
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -27,6 +28,7 @@ function LoginPageContainer() {
     const SignInClick = () => {
         !form.password.length ? setPasswordError(true) : setPasswordError(false);
         !form.email.length ? setEmailError(true) : setEmailError(false);
+        history.push('/Dashboard')
     }
 
     return (
