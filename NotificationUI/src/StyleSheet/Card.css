@@ -1,35 +1,53 @@
+.templateFooter{
+  height: 50px;
+  background: rgb(240, 234, 235);
+}
+.TemplateContainer > div:hover {
+  transform: scale(1.5); 
+  cursor: pointer;
+}
 
-.flexbox {
-    display: flex;
+.TemplateContainer{
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+/* img{max-width: 300px;height: 300px;} */
+.TemplateContainer > div {
+ margin: 15px;
+  box-shadow: 30px 30px 60px 30px rgba(0,0,0,0.3);
+  text-align: center;
+  transition: transform .2s;
+  background-color: #f1f1f1;
+  
+  width: 450px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+.templateContainer > img {
+  max-width: 450px;height: 300px;
+ }
+  
+
+ .container {
+  position: relative;
+  width: 33%;
+  height: 450px;
+  margin: auto;
+  box-shadow: 30px 30px 60px 30px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.container img {vertical-align: middle; width: 100%;height: 100%;}
+
+.container .content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 97%;
+  padding: 20px;
+}
    
-  }
-  
-  .flexbox > div {
-    background-color: #f1f1f1;
-    width:50%;
-    height: 350px;
-    margin: 30px;
-    padding: 20px;
-    font-size: 30px;
-  }
-  .ongoing{
-    margin: 5px;
-    height: 25%;
-    background: #36A2EB;
-  }
-  .completed{
-    margin: 5px;
-    height: 25%;
-    background: #FFCE56;
-  }
-  .deleted{
-    margin: 5px;
-    height: 25%;
-    background: #FF6384;
-  }
-  .expired{
-    margin: 5px;
-    height: 25%;
-    background: #FF6364;
-  }
-  

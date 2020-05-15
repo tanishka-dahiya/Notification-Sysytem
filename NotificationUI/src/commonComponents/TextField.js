@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function TextFieldContainer({ handleChange, placeholder, isError, ErrorMessage }) {
+function TextFieldContainer({ handleChange, placeholder, isError, ErrorMessage, multiline }) {
     const classes = useStyles();
     if (isError) {
         return (
@@ -28,6 +29,17 @@ function TextFieldContainer({ handleChange, placeholder, isError, ErrorMessage }
                 />
             </form>
         )
+    }
+    if (multiline) {
+        return (
+            <TextField
+                id="outlined-multiline-static"
+                label={placeholder}
+                multiline
+                rows={2}
+                variant="outlined"
+                onChange={handleChange}
+            />);
     }
     else {
         return (
