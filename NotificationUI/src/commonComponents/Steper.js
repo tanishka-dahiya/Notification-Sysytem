@@ -24,19 +24,6 @@ function getSteps(Steps) {
     return [Steps.first, Steps.second, Steps.last];
 }
 
-function getStepContent(stepIndex, Details) {
-    switch (stepIndex) {
-        case 0:
-            return Details.first;
-        case 1:
-            return Details.second;
-        case 2:
-            return Details.last;
-        default:
-            return 'Unknown stepIndex';
-    }
-}
-
 export default function HorizontalLabelPositionBelowStepper({ Steps, Details, children, activeStep }) {
     const classes = useStyles();
 
@@ -51,21 +38,7 @@ export default function HorizontalLabelPositionBelowStepper({ Steps, Details, ch
                     </Step>
                 ))}
             </Stepper>
-            <div>
-                {activeStep === steps.length ? (
-                    <div>
-                        <Typography className={classes.instructions}>All steps completed</Typography>
 
-                    </div>
-                ) : (
-                        <div>
-
-
-                            <Typography className={classes.instructions}>{getStepContent(activeStep, Details)}</Typography>
-
-                        </div>
-                    )}
-            </div>
         </div>
     );
 }

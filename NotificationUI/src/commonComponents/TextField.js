@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(.5),
+
             width: '30ch'
         },
     },
