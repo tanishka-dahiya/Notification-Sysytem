@@ -12,7 +12,7 @@ function Dashboard() {
         history.push('/create-Notification')
     }
     const handleYourNotification = () => {
-
+        history.push('/your-Notification')
     }
     return (
         <>

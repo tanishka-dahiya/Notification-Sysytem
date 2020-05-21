@@ -7,6 +7,7 @@ import TextField from './TextField';
 import Steper from './Steper';
 import Template from './NotificationTemplate';
 import SelectContainer from './SelectComponent';
+import Table from './Table';
 export { Button };
 export { Card };
 export { Header };
@@ -16,6 +17,7 @@ export { TextField };
 export { Steper };
 export { Template };
 export { SelectContainer };
+export { Table };
 
 
 
