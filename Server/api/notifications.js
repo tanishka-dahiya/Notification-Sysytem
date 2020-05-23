@@ -1,11 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator/check");
+var multer = require('multer')
 const auth = require("../middleware/auth");
 var nodemailer = require("nodemailer");
 const Post = require("../models/Notification");
 const User = require("../models/User");
 
+
+//Instance Of Storage
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
+var upload = multer({ storage: storage }).single('file')
 // @route    POST api/notifications
 // @desc     Create a Notification
 // @access   Private
@@ -32,6 +44,17 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select("-password");
+      if (req.body.image != "") {
+        upload(req, res, function (err) {
+          if (err instanceof multer.MulterError) {
+            // return res.status(500).json(err)
+          } else if (err) {
+            // return res.status(500).json(err)
+          }
+          // return res.status(200).send(req.file)
+
+        })
+      }
       if (req.body.RecipientType == "email") {
 
         var transporter = nodemailer.createTransport({

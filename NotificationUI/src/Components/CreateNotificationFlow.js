@@ -8,16 +8,46 @@ import '../StyleSheet/Card.css'
 
 
 
-function CreateNotificationFlow() {
+function CreateNotificationFlow({ postNotification, IsError }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [selectedTemplate, setActiveTemplate] = React.useState("");
+
+    const [form, setForm] = useState({
+        title: '',
+        description: '',
+        image: '',
+        TypeOfRecipent: '',
+        recipentDetails: ''
+    });
+    const onTitleChange = (e) => {
+        setForm({ ...form, title: e.target.value })
+    }
+    const onDescriptionChange = (e) => {
+        setForm({ ...form, description: e.target.value })
+    }
+
+    const onChangeHandler = (file) => {
+        setForm({ ...form, image: file })
+    }
+
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    async function handleFinish() {
+        const data = new FormData()
+        data.append('file', form.image)
+
+
+        await postNotification(form);
     };
+
+    const onRecipientChange = (value) => {
+        setForm({ ...form, TypeOfRecipent: value })
+    }
+    const onTypeChange = (e) => {
+        setForm({ ...form, recipentDetails: e.target.value })
+    }
 
 
     const TemplateObject = [{ title: 'Holi Celebration', src: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRXMK0wn3B4QEdSGBkUqy8gFFmOsaMiZM5ZTPRaY9gVSjrU5GKI&usqp=CAU" }, { title: 'Diwali Celebration', src: "https://blog.atlantisthepalm.com/wp-content/uploads/2017/10/8Oct-844x428.jpg" },
@@ -37,17 +67,18 @@ function CreateNotificationFlow() {
         setActiveTemplate(id);
         setActiveStep(1);
     }
+
     return (
         <><Header />
+
             <Steper Steps={Steps} activeStep={activeStep} />
-            <hr width="95%"></hr>
             {activeStep == 0 && <div className="TemplateContainer">
                 {TemplateObject.map((template, index) =>
                     <Template id={index} title={template.title} src={template.src} onClick={handleTemplateClick} />
                 )}
             </div>}
-            {activeStep == 1 && <EditTemplateConatiner imagesrc={TemplateObject[selectedTemplate].src} handleBack={handleBack} handleNext={handleNext} />}
-            {activeStep == 2 && <RecepientDetails imagesrc={TemplateObject[selectedTemplate].src} handleBack={handleBack} handleNext={handleNext} />}
+            {activeStep == 1 && <EditTemplateConatiner onDescriptionChange={onDescriptionChange} onTitleChange={onTitleChange} imagesrc={TemplateObject[selectedTemplate].src} handleNext={handleNext} onChangeHandler={onChangeHandler} />}
+            {activeStep == 2 && <RecepientDetails onDescriptionChange={onTypeChange} onRecipientChange={onRecipientChange} imagesrc={TemplateObject[selectedTemplate].src} handleFinish={handleFinish} />}
 
         </>
 

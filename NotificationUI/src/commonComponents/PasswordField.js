@@ -43,7 +43,7 @@ function PasswordField({ handleChangePassword, isError, ErrorMessage }) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    console.log(isError)
+
     if (isError) {
         return (
             <FormControl error className={clsx(classes.margin, classes.textField)} variant="outlined">

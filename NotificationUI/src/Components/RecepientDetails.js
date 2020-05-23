@@ -6,18 +6,7 @@ import '../StyleSheet/Card.css'
 
 
 
-function RecipientDetails({ handleBack, handleNext, imagesrc }) {
-    const [isDataForm, setActiveFormData] = React.useState(false);
-    const [form, setForm] = useState({
-        TypeOfRecipent: '',
-        recipentDetails: ''
-    });
-    const onRecipientChange = (value) => {
-        setForm({ ...form, TypeOfRecipent: value })
-    }
-    const onDescriptionChange = (e) => {
-        setForm({ ...form, description: e.target.value })
-    }
+function RecipientDetails({ handleBack, handleFinish, imagesrc, onRecipientChange, onDescriptionChange }) {
 
     const TypeOfRecipient = ["Email", "Phone", "Portal"]
 
@@ -28,9 +17,9 @@ function RecipientDetails({ handleBack, handleNext, imagesrc }) {
         <br>
         </br><SelectContainer TypeOfRecipient={TypeOfRecipient} handleChangeRecipient={onRecipientChange} />
         < br >
-        </br><TextField isError={false} placeholder={`Enter ${form.TypeOfRecipent} Address`} handleChange={onDescriptionChange} />
+        </br><TextField isError={false} placeholder={`Enter Email or Mobile`} handleChange={onDescriptionChange} />
         <br></br>
-        <Button onClick={handleNext} placeholder="Next" /><Button onClick={handleBack} placeholder="Back" />
+        <Button onClick={handleFinish} placeholder="Finish" />
     </div >);
 
 

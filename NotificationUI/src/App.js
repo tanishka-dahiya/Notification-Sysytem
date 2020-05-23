@@ -1,9 +1,9 @@
 import React from 'react';
 import { LoginPageContainer } from './Containers/index';
-import { Dashboard } from './Components/index';
-import { CreateNotificationFlow } from './Components/index'
+import { DashBoardContainer } from './Containers/index';
+import { NotificationFlowContainer } from './Containers/index'
 import { YourNotificationContainer } from './Components/index';
-import { RegestrationPageContainer } from './Components/index';
+import { RegistrationPageContainer } from './Containers/index';
 
 import {
   BrowserRouter as Router,
@@ -14,18 +14,19 @@ import {
 
 
 function App() {
+
   return (
     <Router >
       <Switch>
         <Route path="/Dashboard">
-          <Dashboard />
+          <DashBoardContainer />
         </Route>
         <Route path="/Register">
-          <RegestrationPageContainer />
+          <RegistrationPageContainer />
         </Route>
 
         <Route path="/create-Notification">
-          <CreateNotificationFlow />
+          <NotificationFlowContainer />
         </Route>
         <Route path="/your-Notification">
           <YourNotificationContainer />
