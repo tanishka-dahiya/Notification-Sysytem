@@ -13,9 +13,7 @@ const NotificationSchema = new Schema({
   Description: {
     type: String
   },
-  image: {
-    type: String
-  },
+  image: { type: String },
   RecipientType: {
     type: String,
     required: true

@@ -1,98 +1,115 @@
+const path = require("path");
+const multer = require("multer");
 const express = require("express");
-const router = express.Router();
+const fs = require('fs');
 const { check, validationResult } = require("express-validator/check");
 const auth = require("../middleware/auth");
 var nodemailer = require("nodemailer");
 const Post = require("../models/Notification");
 const User = require("../models/User");
 
-// @route    POST api/notifications
-// @desc     Create a Notification
-// @access   Private
-//for sending email enable this--> https://www.google.com/settings/security/lesssecureapps 
-router.post(
-  "/",
-  [
-    auth,
-    [
-      check("title", "Title is required")
-        .not()
-        .isEmpty(), check("RecipientType", "RecipientType is required")
-          .not()
-          .isEmpty(), check("RecipientAddress", "RecipientAddress is required")
-            .not()
-            .isEmpty()
-    ]
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+
+const storage = multer.diskStorage({
+  destination: "./public/uploads/",
+  filename: function (req, file, cb) {
+    cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 },
+}).single("image");
+const router = express.Router();
+router.post("/", auth, async (req, res) => {
+
+  upload(req, res, err => {
+
+    if (!err) {
+      saveNotification(req.body, req.file.path, req.file.filename, req.user.id, res)
+
     }
+    else {
+      console.log(err)
+    }
+  });
+});
+async function saveNotification(detail, path, filename, userId, res) {
 
-    try {
-      const user = await User.findById(req.user.id).select("-password");
-      if (req.body.RecipientType == "email") {
+  try {
+    if (detail.RecipientType == 'Email') {
+      var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "notificationswithyou@gmail.com",
+          pass: "26120303Sudesh@@"
+        }
+      });
 
-        var transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "notificationswithyou@gmail.com",
-            pass: "26120303Sudesh@@"
-          }
-        });
+      var mailOptions = {
+        from: "notificationswithyou@gmail.com",
+        to: detail.RecipientAddress,
+        subject: detail.title,
+        text: detail.Description,
+        html: `<h3>${detail.title}</h3><br></br><h5>${detail.Description}</h5> <img src="cid:unique@kreata.ee"/>`,
+        attachments: [{
+          filename: filename,
+          path: path,
+          cid: 'unique@kreata.ee' //same cid value as in the html img src
+        }]
+      };
 
-        var mailOptions = {
-          from: "notificationswithyou@gmail.com",
-          to: req.body.RecipientAddress,
-          subject: req.body.title,
-          text: req.body.Description
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-          console.log(error)
-
-        });
-
-      }
-      const newNotification = new Post({
-        title: req.body.title,
-        user: req.user.id,
-        Description: req.body.Description,
-        image: req.body.image,
-        RecipientType: req.body.RecipientType,
-        RecipientAddress: req.body.RecipientAddress
+      transporter.sendMail(mailOptions, function (error, info) {
+        console.log(error);
 
       });
 
-      const post = await newNotification.save();
-
-      res.json(post);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
     }
+    const newNotification = new Post({
+      title: detail.title,
+      user: userId,
+      Description: detail.Description,
+      image: path,
+      RecipientType: detail.RecipientType,
+      RecipientAddress: detail.RecipientAddress
+
+    });
+
+    const post = await newNotification.save();
+
+    res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
-);
+  // var image = fs.readFileSync(
+  //   path,
+  //   {
+  //     encoding: null
+  //   }
+  // );
+  // console.log("image", image)
+}
+
 
 
 
 // @route    GET api/notifications
 // @desc     Get post by ID
 // @access   Private
-router.get("your-notification", auth, async (req, res) => {
+router.get("/your-created-notification", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
-    var query = { user: user };
-    const post = await Post.find(query).toArray(function (err, result) {
-      if (err) throw err;
-      console.log(result);
+    var query = { user: req.user.id };
+    const post = Post.find(query, function (err, result) {
+      if (err) { console.log(err) }
+      res.json(result);
+
     });
-    res.json(post);
+
+
   } catch (err) {
     console.error(err.message);
 
-    res.status(500).send("Server Error");
   }
 });
 // @route    GET api/notifications/get-yours-notification
@@ -114,32 +131,6 @@ router.get("get-yours-notification", auth, async (req, res) => {
   }
 });
 
-// @route    DELETE api/notifications/:id
-// @desc     Delete a post
-// @access   Private
-router.delete("/:id", auth, async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-
-    // Check for ObjectId format and post
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/) || !post) {
-      return res.status(404).json({ msg: "Post not found" });
-    }
-
-    // Check user
-    if (post.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: "User not authorized" });
-    }
-
-    await post.remove();
-
-    res.json({ msg: "Post removed" });
-  } catch (err) {
-    console.error(err.message);
-
-    res.status(500).send("Server Error");
-  }
-});
 
 
 module.exports = router;

@@ -1,0 +1,26 @@
+/*just bg and body style*/
+
+
+
+.file-uploader{
+    margin-top: 17px;
+    border-style: dotted;
+    width:70%;
+    height: 170px;
+}
+
+/*this sets the actual file input to overlay our button*/ 
+#fileup{
+
+cursor: pointer;
+}
+@media only screen and (min-width:768px) {
+    .file-uploader{
+        margin-top: 17px;
+        border-style: dotted;
+        width:20%;
+        height: 170px;
+    }
+}
+
+

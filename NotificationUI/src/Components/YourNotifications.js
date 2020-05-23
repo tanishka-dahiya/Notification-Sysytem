@@ -3,7 +3,9 @@ import { Header } from '../commonComponents/index';
 import { Table } from '../commonComponents/index';
 import '../StyleSheet/Dashboard.css';
 
-function YourNotificationContainer() {
+function YourNotificationContainer({ createdNotification }) {
+
+
     const FieldValues = [{ id: 'title', label: 'Title', minWidth: 170 }, , { id: 'description', label: 'Description', minWidth: 100 }, , {
         id: 'recipient',
         label: 'Recipient',
@@ -20,7 +22,7 @@ function YourNotificationContainer() {
     return (
         <>
             <Header />
-            <Table FieldValues={FieldValues} />
+            <Table FieldValues={FieldValues} createdNotification={createdNotification} />
         </>
 
     );

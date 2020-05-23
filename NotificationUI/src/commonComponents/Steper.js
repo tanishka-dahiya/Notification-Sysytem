@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps(Steps) {
-    console.log(Steps)
+
     return [Steps.first, Steps.second, Steps.last];
 }
 
