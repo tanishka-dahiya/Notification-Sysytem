@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from "@emotion/core";
-import BounceLoader from "react-spinners/CircleLoader";
+import BounceLoader from "react-spinners/ClipLoader";
 
 const override = css`
   display: block;
