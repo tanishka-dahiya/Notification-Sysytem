@@ -15,7 +15,7 @@ function CreateNotificationFlow({ postNotification, IsError }) {
     const [form, setForm] = useState({
         title: '',
         description: '',
-        image: '',
+        image: null,
         TypeOfRecipent: '',
         recipentDetails: ''
     });
@@ -35,11 +35,15 @@ function CreateNotificationFlow({ postNotification, IsError }) {
     };
 
     async function handleFinish() {
-        const data = new FormData()
-        data.append('file', form.image)
+        const formData = new FormData();
+        formData.append('image', form.image);
+        formData.append('title', form.title);
+        formData.append('Description', form.description);
+        formData.append('RecipientType', form.TypeOfRecipent);
+        formData.append('RecipientAddress', form.recipentDetails);
 
 
-        await postNotification(form);
+        await postNotification(formData);
     };
 
     const onRecipientChange = (value) => {

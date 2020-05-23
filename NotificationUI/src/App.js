@@ -2,8 +2,8 @@ import React from 'react';
 import { LoginPageContainer } from './Containers/index';
 import { DashBoardContainer } from './Containers/index';
 import { NotificationFlowContainer } from './Containers/index'
-import { YourNotificationContainer } from './Components/index';
 import { RegistrationPageContainer } from './Containers/index';
+import YourNotificationContainer from './Containers/YourNotificationContainer';
 
 import {
   BrowserRouter as Router,
