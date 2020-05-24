@@ -74,7 +74,7 @@ function RegestrationPageContainer({ RegisterUsers, IsToken, IsError }) {
             {(IsError != "") ? <SimpleAlerts message="Enter Correct Details" type='error' /> : ""}
             <div id="formContent">
                 <div className="signinContainer">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSH7nQh1yBCMt1Ixtv_zZ0T4lvGzD_KHIencrORiFays172ZyX1&usqp=CAU" height="600px" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRXVYq2eR1EyWD5zBJksEhJidz-FDA0IaaxR4PQukSMnwzYdzG6&usqp=CAU" height="600px" />
 
                 </div>
 

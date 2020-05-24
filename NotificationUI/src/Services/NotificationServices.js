@@ -14,7 +14,7 @@ export async function postNotificationService(token, data) {
 
 };
 export async function getYourCreatedNotification(token) {
-    console.log("mm")
+
     const result = await axios.get("http://localhost:5000/api/notifications/your-created-notification",
 
         {
@@ -27,4 +27,19 @@ export async function getYourCreatedNotification(token) {
     return result;
 
 };
+export async function myNotification(token) {
+
+    const result = await axios.get("http://localhost:5000/api/notifications/get-yours-notification",
+
+        {
+            headers: {
+                'x-auth-token': token,
+
+            }
+        })
+
+    return result;
+
+};
+
 
