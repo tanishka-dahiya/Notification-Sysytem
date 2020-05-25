@@ -4,6 +4,7 @@ import { DashBoardContainer } from './Containers/index';
 import { NotificationFlowContainer } from './Containers/index'
 import { RegistrationPageContainer } from './Containers/index';
 import YourNotificationContainer from './Containers/YourNotificationContainer';
+import MyNotificationContainers from './Containers/MyNotificationContainer';
 
 import {
   BrowserRouter as Router,
@@ -20,6 +21,9 @@ function App() {
       <Switch>
         <Route path="/Dashboard">
           <DashBoardContainer />
+        </Route>
+        <Route path="/my-notification">
+          <MyNotificationContainers />
         </Route>
         <Route path="/Register">
           <RegistrationPageContainer />

@@ -82,13 +82,7 @@ async function saveNotification(detail, path, filename, userId, res) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
-  // var image = fs.readFileSync(
-  //   path,
-  //   {
-  //     encoding: null
-  //   }
-  // );
-  // console.log("image", image)
+
 }
 
 
@@ -115,19 +109,33 @@ router.get("/your-created-notification", auth, async (req, res) => {
 // @route    GET api/notifications/get-yours-notification
 // @desc     Get post by ID
 // @access   Private
-router.get("get-yours-notification", auth, async (req, res) => {
+router.get("/get-yours-notification", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
     var query = { RecipientAddress: user.email };
-    const post = await Post.find(query).toArray(function (err, result) {
-      if (err) throw err;
-      console.log(result);
+    const post = Post.find(query, function (err, result) {
+      if (err) { console.log(err) }
+
+
+
+      result.forEach((data) => {
+        var image = fs.readFileSync(
+          data.image,
+          {
+            encoding: null
+          }
+        );
+        const base64String = image.toString('base64');
+        data.image = base64String;
+      })
+      res.json(result);
+
     });
-    res.json(post);
+
+
   } catch (err) {
     console.error(err.message);
 
-    res.status(500).send("Server Error");
   }
 });
 
