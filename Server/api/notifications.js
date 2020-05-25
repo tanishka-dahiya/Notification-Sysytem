@@ -125,7 +125,8 @@ router.get("/get-yours-notification", auth, async (req, res) => {
             encoding: null
           }
         );
-        data.image = image;
+        const base64String = image.toString('base64');
+        data.image = base64String;
       })
       res.json(result);
 
