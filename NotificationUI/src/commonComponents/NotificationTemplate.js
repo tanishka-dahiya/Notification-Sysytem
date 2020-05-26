@@ -9,7 +9,7 @@ export default function Template({ src, title, onClick, id, description, isNotif
             <Zoom>
 
                 <div className="templateContainer" onClick={e => onClick(id)}>
-                    <img src={src} />
+                    <img src={src} height="600px" width='325px' />
                     <div className="templateFooter">
                         <h4>{title}</h4>
 

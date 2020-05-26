@@ -12,6 +12,7 @@
  }
  .templateContainer > img {
    max-width: 325px;height: 200px;
+   margin: auto
   }.template-description{
     height: 100px;
     background: rgb(240, 234, 235);
@@ -46,6 +47,7 @@
 }
 .templateContainer > img {
   max-width: 450px;height: 300px;
+  margin: auto
  }
   
 

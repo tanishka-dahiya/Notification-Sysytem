@@ -26,7 +26,14 @@ router.post("/", auth, async (req, res) => {
   upload(req, res, err => {
 
     if (!err) {
-      saveNotification(req.body, req.file.path, req.file.filename, req.user.id, res)
+      if (req.file == undefined) {
+        saveNotification(req.body, null, null, req.user.id, res)
+
+      }
+      else {
+        saveNotification(req.body, req.file.path, req.file.filename, req.user.id, res)
+      }
+
 
     }
     else {
@@ -34,7 +41,7 @@ router.post("/", auth, async (req, res) => {
     }
   });
 });
-async function saveNotification(detail, path, filename, userId, res) {
+async function saveNotification(detail, path = null, filename = null, userId, res) {
 
   try {
     if (detail.RecipientType == 'Email') {
@@ -121,14 +128,16 @@ router.get("/get-yours-notification", auth, async (req, res) => {
 
 
       result.forEach((data) => {
-        var image = fs.readFileSync(
-          data.image,
-          {
-            encoding: null
-          }
-        );
-        const base64String = image.toString('base64');
-        data.image = base64String;
+        if (data.image != null) {
+          var image = fs.readFileSync(
+            data.image,
+            {
+              encoding: null
+            }
+          );
+          const base64String = image.toString('base64');
+          data.image = base64String;
+        }
       })
       res.json(result);
 

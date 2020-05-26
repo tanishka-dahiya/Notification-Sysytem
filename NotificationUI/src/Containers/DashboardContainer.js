@@ -5,7 +5,6 @@ import { Dashboard } from '../Components/index';
 import { getToken, getLoading } from '../ReduxContainers/registerAndLogin';
 import { Loader } from '../commonComponents/index';
 
-import { NotAuthorized } from '../commonComponents/index';
 
 function DashBoardContainer(props) {
 
@@ -13,13 +12,11 @@ function DashBoardContainer(props) {
     if (props.IsLoading) {
         return (<Loader />)
     }
-    else if (props.IsToken != "") {
+    else {
 
         return (<Dashboard />);
     }
-    else {
-        return (<NotAuthorized />);
-    }
+
 }
 export default compose(
     connect(

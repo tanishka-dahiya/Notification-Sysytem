@@ -5,6 +5,7 @@ import { YourNotificationContainer } from '../Components/index';
 import { Loader } from '../commonComponents/index';
 import { createdNotification, getLoading, getYourCreatedNotifications } from '../ReduxContainers/Notifications';
 
+
 class YourNotificationContainers extends React.Component {
     constructor(props) {
         super(props);
@@ -16,10 +17,11 @@ class YourNotificationContainers extends React.Component {
 
     }
     render() {
-        console.log("data", this.props.isData.data)
+
         if (this.props.IsLoading) {
             return (<Loader />);
         }
+
         else {
             return (<YourNotificationContainer createdNotification={this.props.isData.data} />);
         }

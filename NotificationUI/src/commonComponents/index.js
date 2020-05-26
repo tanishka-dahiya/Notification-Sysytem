@@ -9,7 +9,7 @@ import Template from './NotificationTemplate';
 import SelectContainer from './SelectComponent';
 import Table from './Table';
 import SimpleAlerts from './Alert';
-import NotAuthorized from './NotAuthorized';
+import NoDataPage from './NotAuthorized';
 import FileUploader from './ImageUploader';
 export { Button };
 export { Card };
@@ -22,7 +22,7 @@ export { Template };
 export { SelectContainer };
 export { Table };
 export { SimpleAlerts };
-export { NotAuthorized };
+export { NoDataPage };
 export { FileUploader };
 
 
