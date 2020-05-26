@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Steper } from '../commonComponents/index';
-import { Header } from '../commonComponents/index';
 import { Template } from '../commonComponents/index';
 import { EditTemplateConatiner } from '../Components/index';
 import { RecepientDetails } from '../Components/index';
@@ -73,9 +72,7 @@ function CreateNotificationFlow({ postNotification, IsError }) {
     }
 
     return (
-        <><Header />
-
-            <Steper Steps={Steps} activeStep={activeStep} />
+        <><Steper Steps={Steps} activeStep={activeStep} />
             {activeStep == 0 && <div className="TemplateContainer">
                 {TemplateObject.map((template, index) =>
                     <Template id={index} title={template.title} src={template.src} onClick={handleTemplateClick} />

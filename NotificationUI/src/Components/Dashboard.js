@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Header } from '../commonComponents/index';
 import { Card } from '../commonComponents/index';
 
 import {
@@ -21,7 +20,7 @@ function Dashboard() {
     }
 
 
-    return (<><Header />
+    return (<>
         <h3>Dashboard</h3>
         <hr width="95%"></hr>
         <div class="flex-container">
