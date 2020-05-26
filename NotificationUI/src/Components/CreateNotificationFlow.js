@@ -20,6 +20,7 @@ function CreateNotificationFlow({ postNotification, IsError, NotificationSent })
         TypeOfRecipent: '',
         recipentDetails: ''
     });
+
     const onTitleChange = (e) => {
         setForm({ ...form, title: e.target.value })
     }
@@ -76,7 +77,6 @@ function CreateNotificationFlow({ postNotification, IsError, NotificationSent })
     }
 
 
-
     return (
 
         <>
@@ -87,7 +87,7 @@ function CreateNotificationFlow({ postNotification, IsError, NotificationSent })
                     <Template isNotification={false} id={index} title={template.title} src={template.src} onClick={handleTemplateClick} />
                 )}
             </div>}
-            {activeStep == 1 && <EditTemplateConatiner titleValue={TemplateObject[selectedTemplate].title} onDescriptionChange={onDescriptionChange} onTitleChange={onTitleChange} imagesrc={TemplateObject[selectedTemplate].src} handleNext={handleNext} onChangeHandler={onChangeHandler} />}
+            {activeStep == 1 && <EditTemplateConatiner onDescriptionChange={onDescriptionChange} onTitleChange={onTitleChange} imagesrc={TemplateObject[selectedTemplate].src} handleNext={handleNext} onChangeHandler={onChangeHandler} />}
             {activeStep == 2 && <RecepientDetails onDescriptionChange={onTypeChange} onRecipientChange={onRecipientChange} imagesrc={TemplateObject[selectedTemplate].src} handleFinish={handleFinish} />}
 
         </>
