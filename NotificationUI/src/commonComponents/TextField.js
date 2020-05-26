@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function TextFieldContainer({ handleChange, placeholder, isError, ErrorMessage, multiline }) {
+function TextFieldContainer({ handleChange, placeholder, isError, ErrorMessage, multiline, defaultValue }) {
     const classes = useStyles();
     if (isError) {
         return (
@@ -45,7 +45,7 @@ function TextFieldContainer({ handleChange, placeholder, isError, ErrorMessage, 
     else {
         return (
             <form className={classes.root}>
-                <TextField id="outlined-basic" label={placeholder} variant="outlined"
+                <TextField id="outlined-basic" label={placeholder} variant="outlined" defaultValue={defaultValue}
                     onChange={handleChange} />
             </form>
         );

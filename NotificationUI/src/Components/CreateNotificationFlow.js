@@ -3,16 +3,18 @@ import { Steper } from '../commonComponents/index';
 import { Template } from '../commonComponents/index';
 import { EditTemplateConatiner } from '../Components/index';
 import { RecepientDetails } from '../Components/index';
+import { SimpleAlerts } from '../commonComponents/index';
+
 import '../StyleSheet/Card.css'
 
 
 
-function CreateNotificationFlow({ postNotification, IsError }) {
+function CreateNotificationFlow({ postNotification, IsError, NotificationSent }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [selectedTemplate, setActiveTemplate] = React.useState("");
 
     const [form, setForm] = useState({
-        title: '',
+        title: "",
         description: '',
         image: null,
         TypeOfRecipent: '',
@@ -43,6 +45,7 @@ function CreateNotificationFlow({ postNotification, IsError }) {
 
 
         await postNotification(formData);
+
     };
 
     const onRecipientChange = (value) => {
@@ -68,17 +71,23 @@ function CreateNotificationFlow({ postNotification, IsError }) {
 
     const handleTemplateClick = (id) => {
         setActiveTemplate(id);
+
         setActiveStep(1);
     }
 
+
+
     return (
-        <><Steper Steps={Steps} activeStep={activeStep} />
+
+        <>
+            {(NotificationSent == true) ? <SimpleAlerts message="Notifications Sent Successfully." type='success' /> : ""}
+            <Steper Steps={Steps} activeStep={activeStep} />
             {activeStep == 0 && <div className="TemplateContainer">
                 {TemplateObject.map((template, index) =>
                     <Template isNotification={false} id={index} title={template.title} src={template.src} onClick={handleTemplateClick} />
                 )}
             </div>}
-            {activeStep == 1 && <EditTemplateConatiner onDescriptionChange={onDescriptionChange} onTitleChange={onTitleChange} imagesrc={TemplateObject[selectedTemplate].src} handleNext={handleNext} onChangeHandler={onChangeHandler} />}
+            {activeStep == 1 && <EditTemplateConatiner titleValue={TemplateObject[selectedTemplate].title} onDescriptionChange={onDescriptionChange} onTitleChange={onTitleChange} imagesrc={TemplateObject[selectedTemplate].src} handleNext={handleNext} onChangeHandler={onChangeHandler} />}
             {activeStep == 2 && <RecepientDetails onDescriptionChange={onTypeChange} onRecipientChange={onRecipientChange} imagesrc={TemplateObject[selectedTemplate].src} handleFinish={handleFinish} />}
 
         </>

@@ -6,15 +6,15 @@ import { FileUploader } from '../commonComponents/index';
 
 
 
-function EditTemplateConatiner({ handleBack, handleNext, imagesrc, onTitleChange, onDescriptionChange, onChangeHandler }) {
-
+function EditTemplateConatiner({ titleValue, handleBack, handleNext, imagesrc, onTitleChange, onDescriptionChange, onChangeHandler }) {
+    console.log("log")
 
     return (<div className="container">
         <h3>Enter Details About Notification.</h3>
         <hr width="95%"></hr>
 
         <br>
-        </br><TextField isError={false} placeholder="Title" handleChange={onTitleChange} />
+        </br><TextField isError={false} placeholder="Title" defaultValue={titleValue} handleChange={onTitleChange} />
         <br>
         </br><TextField isError={false} placeholder="Description" handleChange={onDescriptionChange} multiline={true} />
         <br></br>

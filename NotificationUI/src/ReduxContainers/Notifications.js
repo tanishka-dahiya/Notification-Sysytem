@@ -12,18 +12,22 @@ const GET_YOUR_NOTIFICATION = `${PREFIX}//GET_YOUR_NOTIFICATION`;
 const SET_NOTIFICATION = `${PREFIX}//SET_NOTIFICATION`;
 const GET_MY_NOTIFICATION = `${PREFIX}//GET_MY_NOTIFICATION`;
 const SET_MY_NOTIFICATION = `${PREFIX}//SET_MY_NOTIFICATION`;
+const NOTIFICATION_DONE = `${PREFIX}//NOTIFICATION_DONE`;
 
 
 const initState = {
     loading: false,
     error: "",
     yourCreatedNotification: [],
-    myNotification: []
+    myNotification: [],
+    SendNotificationDone: false
 };
 
 const NotificationReducer = (state = initState, action = {}) => {
     const handlers = {
         [SET_LOADING]: () => ({ ...state, loading: action.payload }),
+        [NOTIFICATION_DONE]: () => ({ ...state, SendNotificationDone: action.payload }),
+
         [SET_ERRORS]: () => ({ ...state, error: action.payload }),
         [SET_NOTIFICATION]: () => ({ ...state, yourCreatedNotification: action.payload }),
         [SET_MY_NOTIFICATION]: () => ({ ...state, myNotification: action.payload })
@@ -68,6 +72,7 @@ function* postNotificationSaga(action) {
     try {
         const token = yield select(gettoken);
         const result = yield call(postNotificationService, token.data.token, action.payload);
+        yield put({ type: NOTIFICATION_DONE, payload: true });
 
         yield put({ type: SET_LOADING, payload: false });
     } catch (e) {
@@ -93,6 +98,8 @@ export const getLoading = state => state.NotificationReducer.loading;
 export const getError = state => state.NotificationReducer.error;
 export const getYourCreatedNotifications = state => state.NotificationReducer.yourCreatedNotification;
 export const getMyNotifications = state => state.NotificationReducer.myNotification;
+export const getSuccessNotifications = state => state.NotificationReducer.SendNotificationDone;
+
 
 
 
