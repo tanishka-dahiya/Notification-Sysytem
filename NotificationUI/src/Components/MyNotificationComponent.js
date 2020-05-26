@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Card } from '../commonComponents/index';
+import { Template } from '../commonComponents/index';
 
-import '../StyleSheet/Dashboard.css';
 
 function MyNotificationComponent({ createdNotification }) {
 
@@ -10,10 +9,10 @@ function MyNotificationComponent({ createdNotification }) {
         return (
 
             <>
-                <div class="flex-container">
-                    {createdNotification.map((number) => {
+                <div className="TemplateContainer">
+                    {createdNotification.map((number, index) => {
 
-                        return < div > <Card title={number.title} desc={number.Description} imageSrc={`data:image/png;base64,${number.image}`} /></div >
+                        return <Template id={index} isNotification={true} title={number.title} description={number.Description} src={`data:image/png;base64,${number.image}`} />
                     })}
                 </div>
             </>

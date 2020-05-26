@@ -75,7 +75,7 @@ function CreateNotificationFlow({ postNotification, IsError }) {
         <><Steper Steps={Steps} activeStep={activeStep} />
             {activeStep == 0 && <div className="TemplateContainer">
                 {TemplateObject.map((template, index) =>
-                    <Template id={index} title={template.title} src={template.src} onClick={handleTemplateClick} />
+                    <Template isNotification={false} id={index} title={template.title} src={template.src} onClick={handleTemplateClick} />
                 )}
             </div>}
             {activeStep == 1 && <EditTemplateConatiner onDescriptionChange={onDescriptionChange} onTitleChange={onTitleChange} imagesrc={TemplateObject[selectedTemplate].src} handleNext={handleNext} onChangeHandler={onChangeHandler} />}

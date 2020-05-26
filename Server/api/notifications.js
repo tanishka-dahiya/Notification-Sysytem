@@ -65,13 +65,15 @@ async function saveNotification(detail, path, filename, userId, res) {
       });
 
     }
+    const str = detail.RecipientAddress;
+    const Recipients = str.split(',');
     const newNotification = new Post({
       title: detail.title,
       user: userId,
       Description: detail.Description,
       image: path,
       RecipientType: detail.RecipientType,
-      RecipientAddress: detail.RecipientAddress
+      RecipientAddress: Recipients
 
     });
 
@@ -112,8 +114,8 @@ router.get("/your-created-notification", auth, async (req, res) => {
 router.get("/get-yours-notification", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    var query = { RecipientAddress: user.email };
-    const post = Post.find(query, function (err, result) {
+
+    const post = Post.find({ RecipientAddress: user.email }, function (err, result) {
       if (err) { console.log(err) }
 
 
