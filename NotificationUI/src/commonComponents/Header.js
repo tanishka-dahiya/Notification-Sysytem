@@ -6,6 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {
+    Redirect
+} from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,10 +23,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ ResetUsers }) {
+    const [logOut, setLogOUT] = React.useState(false);
     const classes = useStyles();
+    const handleClick = () => {
+        ResetUsers();
+        setLogOUT(true)
 
+
+    }
+    if (logOut == true) {
+        return <Redirect to="/Register" push={true} />
+    }
     return (
+
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
@@ -32,7 +46,7 @@ export default function ButtonAppBar() {
                     <Typography variant="h6" className={classes.title}>
                         Alerto
           </Typography>
-                    <Button color="inherit">LogOut</Button>
+                    <Button color="inherit" onClick={handleClick}>LogOut</Button>
                 </Toolbar>
             </AppBar>
         </div>

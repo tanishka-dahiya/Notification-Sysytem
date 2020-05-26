@@ -10,6 +10,8 @@ const SET_LOADING = `${PREFIX}//SET_LOADING`;
 const SET_ERRORS = `${PREFIX}//SET_ERRORS`;
 const SET_USER = `${PREFIX}//SET_USER`;
 const AUTH_USER = `${PREFIX}//AUTH_USER`;
+const RESET_USER = `${PREFIX}//RESET_USER`;
+
 
 const initState = {
     loading: false,
@@ -23,6 +25,7 @@ const RegisterUser = (state = initState, action = {}) => {
         [SET_USER]: () => ({ ...state, token: action.payload }),
 
         [SET_ERRORS]: () => ({ ...state, error: action.payload }),
+        [RESET_USER]: () => ({ ...state, token: "" })
 
     };
     return handlersDefaultCase(handlers, action, state);
@@ -30,6 +33,8 @@ const RegisterUser = (state = initState, action = {}) => {
 
 export const RegisterUsers = user => ({ type: POST_USER, payload: user });
 export const AuthUsers = user => ({ type: AUTH_USER, payload: user });
+export const ResetUsers = () => ({ type: RESET_USER });
+
 
 
 export function* RegisterSaga() {

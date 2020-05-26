@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Header } from '../commonComponents/index';
 import { Card } from '../commonComponents/index';
 
 import '../StyleSheet/Dashboard.css';
@@ -10,7 +9,7 @@ function MyNotificationComponent({ createdNotification }) {
     if (createdNotification != undefined) {
         return (
 
-            <><Header />
+            <>
                 <div class="flex-container">
                     {createdNotification.map((number) => {
 
@@ -22,7 +21,7 @@ function MyNotificationComponent({ createdNotification }) {
         );
     }
     else {
-        return (< Header />)
+        return ("")
     }
 
 

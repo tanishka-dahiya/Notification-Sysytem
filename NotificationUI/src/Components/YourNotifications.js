@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Header } from '../commonComponents/index';
 import { Table } from '../commonComponents/index';
 import '../StyleSheet/Dashboard.css';
 
@@ -21,7 +20,6 @@ function YourNotificationContainer({ createdNotification }) {
     },]
     return (
         <>
-            <Header />
             <Table FieldValues={FieldValues} createdNotification={createdNotification} />
         </>
 
