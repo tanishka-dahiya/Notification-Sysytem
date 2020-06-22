@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     textField: {
-        width: '30ch',
+        width: '27ch',
     },
 }));
 
@@ -43,7 +43,7 @@ function PasswordField({ handleChangePassword, isError, ErrorMessage }) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    console.log(isError)
+
     if (isError) {
         return (
             <FormControl error className={clsx(classes.margin, classes.textField)} variant="outlined">

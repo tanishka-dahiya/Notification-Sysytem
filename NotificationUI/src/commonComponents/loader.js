@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from "@emotion/core";
-import ClimbingBoxLoader from "react-spinners/RingLoader";
+import BounceLoader from "react-spinners/ClipLoader";
 
 const override = css`
   display: block;
@@ -9,10 +9,10 @@ const override = css`
 function Loader() {
 
     return (
-        <ClimbingBoxLoader
+        <BounceLoader
             css={override}
             size={200}
-            color={"white"}
+            color={"Blue"}
             loading={true}
         />
 

@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+
+
+.signinContainer {
+  display: none;
+}
+#formContent {
+  display: flex;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  
+  width: 80%;
+  height:600px;
+  margin: 50px auto;
+  
+  box-shadow: 30px 30px 60px 30px rgba(0,0,0,0.3);
+  text-align: center;
+  
+ 
+}
+.signupContainer  {
+  background:white;
+  width: 100%;
+  text-align: center;
+}
+
+@media only screen and (min-width:768px) {
+  h2{
+    padding: 20px;
+  }
+  img {
+    max-width:100%;
+    display: block;
+  }
+  .signinContainer {
+    background:white;
+    display: block;
+    width: 50%;
+    
+    
+  }
+
+  .signupContainer  {
+    background:white;
+    width: 50%;
+    text-align: center;
+  }
+  p{
+    margin:3px;
+    padding:3px;
+  }
+  
+}
+

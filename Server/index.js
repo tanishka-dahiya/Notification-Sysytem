@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/db");
+
 var cors = require("cors");
 const app = express();
 const path = require("path");
@@ -9,10 +10,11 @@ connectDB();
 app.use(cors());
 app.use(express.json({ extended: false }));
 
+
 //Define Routes
 app.use("/api/users", require("./api/users"));
 app.use("/api/auth", require("./api/auth"));
-app.use("/api/tasks", require("./api/posts"));
+app.use("/api/notifications", require("./api/notifications"));
 
 
 //serve static assets in production

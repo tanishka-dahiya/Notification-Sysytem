@@ -6,11 +6,15 @@ import {
     Link, useHistory
 } from "react-router-dom";
 import Zoom from 'react-reveal/Zoom';
+import { SimpleAlerts } from '../commonComponents/index';
+
 import '../StyleSheet/Login.css';
 
 
-function LoginPageContainer() {
+function LoginPageContainer({ AuthUsers, IsToken, IsError }) {
     let history = useHistory();
+    const validEmailRegex =
+        RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -25,19 +29,26 @@ function LoginPageContainer() {
     const onPasswordfieldChange = (e) => {
         setForm({ ...form, password: e.target.value })
     }
-    const SignInClick = () => {
-        !form.password.length ? setPasswordError(true) : setPasswordError(false);
-        !form.email.length ? setEmailError(true) : setEmailError(false);
-        history.push('/Dashboard')
+    async function SignInClick() {
+        const user = { name: form.name, email: form.email, password: form.password }
+        if ((form.password.length > 5) && validEmailRegex.test(form.email)) {
+            await AuthUsers(user);
+
+        }
     }
+
+    if (IsToken !== "") {
+        history.push('/Dashboard')
+
+    }
+
 
     return (
         <Zoom>
-            <div id="formContent">
-                <div className="signinContainer">
-                    <div className="image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRd9i_-4mi8b5gQoIef3KezGadi-RqwQ_4lk45UvoD0jpjqvrwB&usqp=CAU" height="120px" />
-                    </div>
+            {(IsError != "") ? <SimpleAlerts message="Enter Valid Credentials" type='error' /> : ""}
+            <div id="formContentLogin">
+                <div className="signinContainerLogin">
+
                     <h2>Sign In</h2>
                     <TextField isError={emailError} ErrorMessage="Enter valid Email Id." placeholder="Email Id" handleChange={onTextfieldChange} />
                     <br>
@@ -48,12 +59,12 @@ function LoginPageContainer() {
                     <br>
                     </br>
                     <div>
-                        <p> <Link to="/ForgetPassword">Forgot Password?</Link></p>
+                        <p><Link to="/Register">Don't have an Account,Create.</Link></p>
                     </div>
                 </div>
 
-                <div className="signupContainer">
-                    <img src="https://www.osiaffiliate.com/blog/wp-content/uploads/2019/05/osi-push-1.png" height="600px" />
+                <div className="signupContainerLogin">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRXVYq2eR1EyWD5zBJksEhJidz-FDA0IaaxR4PQukSMnwzYdzG6&usqp=CAU" height="600px" />
                 </div>
             </div>
         </Zoom>
