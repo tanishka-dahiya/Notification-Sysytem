@@ -29,7 +29,7 @@ in NotificationUI folder
 npm start
 ```
 ## Usage
-This Project uses reactjs,Material-Ui icons and components,redux, axios and Moongoose,nodejs,Express,cors,jsonwebtoken,nodemailer,nodemon,redux-saga.
+This Project uses reactjs,Material-Ui icons and components,redux, axios and Moongoose,nodejs,Express,cors,jsonwebtoken,nodemailer,nodemon,redux-saga and it is fully responsive.
 
 ## Demo
 
